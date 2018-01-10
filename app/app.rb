@@ -31,7 +31,7 @@ class GamePlatform < Sinatra::Base
             password_confirm: params[:password_confirm])
     if user.save
       session[:user_id] = user.id
-      redirect '/spaces'
+      redirect '/'
     else
       flash.next[:errors] = user.errors.full_messages
       redirect('/users/new')
@@ -44,11 +44,21 @@ class GamePlatform < Sinatra::Base
     user = User.authenticate(params[:username], params[:password])
     if user
       session[:user_id] = user.id
-      redirect '/spaces'
+      redirect '/'
     else
       flash.next[:errors] = ['The email or password is incorrect']
       redirect '/users/new'
     end
+  end
+
+   post '/logout' do
+    session[:user_id] = nil
+    flash.keep[:notice] = 'goodbye!'
+    redirect '/'
+  end
+
+  get '/' do
+    erb :homepage
   end
 
   
