@@ -7,7 +7,7 @@ require 'database_cleaner'
 require 'pry'
 require_relative 'web_helpers'
 
-Capybara.app = MakersBnB
+Capybara.app = GamePlatform
 
 RSpec.configure do |config|
 

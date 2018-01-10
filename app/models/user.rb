@@ -12,9 +12,6 @@ class User
   property :last_name, String
   property :password_hash, Text, required: true
 
-  has n, :spaces
-  has n, :bookings
-
   attr_reader :password
   attr_accessor :password_confirm
 
