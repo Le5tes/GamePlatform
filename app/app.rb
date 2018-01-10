@@ -58,9 +58,9 @@ class GamePlatform < Sinatra::Base
     redirect '/'
   end
 
-  # get '/' do
-  #   erb :homepage
-  # end
+  get '/' do
+    erb :homepage
+  end
 
   
 
