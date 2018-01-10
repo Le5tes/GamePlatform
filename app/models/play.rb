@@ -1,8 +1,9 @@
+require 'dm-types'
 class Play
   include DataMapper::Resource
 
   property :id, Serial
-  property :gamestate, JSON
+  property :gamestate, Json
 
   belongs_to :user 
   belongs_to :game
