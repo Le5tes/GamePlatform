@@ -74,6 +74,9 @@ class GamePlatform < Sinatra::Base
     erb :homepage
   end
 
+  get '/keyboard_fighter' do
+    erb(:'/gamesView/keyboard_fighter')
+  end
   
 
 end
