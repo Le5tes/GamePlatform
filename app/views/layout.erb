@@ -1,71 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title> Game Platform</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
-    .navbar-right {
-      padding: 20px;
-      font-weight: bold;
-      align: right;
-    }
-    .navbar-left {
-      padding: 10px;
-      font-weight: bold;
-    }
-    .navbar-brand {
-      padding: 20px;
-      font-size: 30px;
-    }
-    .label {
-      padding-right: 10px;
-      color: grey;
-      font-size: 15px;
-    }
-    .buttons {
-      height: 26.5px;
-      margin: 5px;
-    }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="/jquery-3.2.1.min.js"></script>
+    <script src="/layoutjquery.js"></script>
   </head>
   <body>
 
+  <button onclick="openSidebar()">opensidebar</button>
 
-    <div id="container" class="container">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand">MakersBnB</a>
-          </div>
-          <ul class="nav navbar-nav navbar-left">
-            <% if !@home %><li><a href="/spaces">All Spaces</a></li>  <% end %>
-            <% if current_user && !@mine %><li><a href="/spaces/my-spaces">My Spaces</a></li><% end %>
-            <% if current_user && !@my_bookings %><li><a href="/bookings">My Bookings</a></li><% end %>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <div>
-              <% if !current_user %><li>
-                <form action="/login" method="post">
-                  <label class="label" >Username</label>
-                  <input type="text" name="username" placeholder="username">
-                  <label class="label" >Password</label>
-                  <input type="password" name="password" placeholder="password">
-                  <input class="buttons" type='submit' value='Log in'>
-                </form></li>
-              <% end %>
-              <% if current_user %><li>
-                <form method="post" action="/logout">
-                  <label class="label" >Welcome <%= current_user.first_name %>!</label>
-                  <input class="buttons" type="submit" value="Log out">
-                </form></li>
-              <% end %>
-            </div>
-          </ul>
-        </div>
-      </nav>
-
+  <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+    <button class="w3-bar-item w3-button w3-large" onclick="closeSidebar()">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button">Link 3</a>
   </div>
+
+  <div id="main">
+  </div>
+
+
 
     <% if flash[:errors] && !flash[:errors].empty? %>
     Please refer to the following errors below:
