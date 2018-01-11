@@ -1,5 +1,6 @@
 require 'bcrypt'
 require 'dm-validations'
+require 'dm-types'
 
 class User
   include DataMapper::Resource
@@ -11,6 +12,7 @@ class User
   property :first_name, String
   property :last_name, String
   property :password_hash, Text, required: true
+  property :profile_pic, URI
 
   attr_reader :password
   attr_accessor :password_confirm

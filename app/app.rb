@@ -14,6 +14,18 @@ class GamePlatform < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
+    def save_image(image_file, filename)
+      File.open('./public/images/#{filename}', 'wb'){|file|
+        file.write(image_file.read)
+      }
+    end
+
+    def add_user_profile_pic(user, image_file, filename)
+      save_image(image_file,filename)
+      user.profile_pic = '/images/#{filename}'
+      user.save
+    end
   end
 
 
@@ -30,6 +42,8 @@ class GamePlatform < Sinatra::Base
             password_confirm: params[:password_confirm])
     if user.save
       session[:user_id] = user.id
+      add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) 
+
       redirect '/'
     else
       flash.next[:errors] = user.errors.full_messages
