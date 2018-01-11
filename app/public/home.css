@@ -1,7 +1,23 @@
-.homebox {
+.home-box {
   background-color: grey;
-  margin-left: 40vmax;
-  margin-right: 40vmax;
-  margin-top: 40vmin;
-  margin-bottom: 40vmin;
+  margin-top: 30vmin;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  padding: 5%;
+}
+
+.home-buttons {
+  padding: 3%;
+  width: 100%;
+}
+
+.home-button1 {
+  padding: 1.5%;
+}
+
+.home-button2 {
+  padding: 1.5%;
 }
