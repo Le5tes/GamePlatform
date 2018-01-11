@@ -1,8 +1,9 @@
 .home-box {
   background-color: grey;
-  margin-top: 30vmin;
-  width: 100%;
+  margin-top: 20vmin;
+  width: 80%;
   height: 100%;
+  padding: 2%
 }
 
 .title {
@@ -14,14 +15,11 @@
   top: 50vmin;
 }
 
-<<<<<<< HEAD
 .signupform {
-  padding: 2%;
-  
+  margin: 2%;
+  width: 90%;
 }
 
-=======
->>>>>>> 218920c438413454421f5160c354e6c2589331ed
 .home-buttons {
   padding: 3%;
   width: 100%;
