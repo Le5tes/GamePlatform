@@ -1,7 +1,9 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
 require 'dm-types'
-
+require_relative './models/user'
+require_relative './models/play'
+require_relative './models/game'
 
 
 def data_mapper_setup
