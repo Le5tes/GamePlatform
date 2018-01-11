@@ -17,7 +17,7 @@ class User
   attr_reader :password
   attr_accessor :password_confirm
 
-  has n, :plays
+  has n, :plays, through: Resource
 
   validates_confirmation_of :password, confirm: :password_confirm
 

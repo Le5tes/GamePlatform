@@ -76,8 +76,19 @@ class GamePlatform < Sinatra::Base
     erb :homepage
   end
 
+
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
+  end
+
+
+
+  get '/play/getstate/:id' do
+    Play.first(id: params[:id]).gamestate
+  end
+
+  post '/play/gamestate' do
+    Play.first(id: params[:id]).gamestate = params[:gamestate]
   end
 
   run if app_file == $0
