@@ -78,6 +78,10 @@ class GamePlatform < Sinatra::Base
     Play.first(id: params[:id]).gamestate
   end
 
+  post '/play/gamestate' do
+    Play.first(id: params[:id]).gamestate = params[:gamestate]
+  end
+
   
 
 end
