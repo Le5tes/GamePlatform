@@ -9,6 +9,11 @@
   padding: 5%;
 }
 
+.sidebar-tag {
+  position: absolute;
+  top: 50vmin;
+}
+
 .home-buttons {
   padding: 3%;
   width: 100%;
