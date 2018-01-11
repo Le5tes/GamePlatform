@@ -17,13 +17,19 @@
       <div class="container-flex title">
         <h1>hello</h1>
       </div>
+      <% if current_user == nil %>
       <div class="home-button1">
         <button class="home-buttons" name="signin" onclick="logInForm()">Log In</button>
       </div>
       <div class="home-button2">
         <button class="home-buttons" name="signin" onclick="signUpForm()">Sign Up</button>
       </div>
-    </div>
+      <% else %>
+        <div class="home-button2">
+          <button class="home-buttons" name="Play">Play</button>
+        </div>
+      <% end %>
+   </div>
   </div>
   <div class="col-sm-3">
   </div>

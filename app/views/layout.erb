@@ -13,22 +13,14 @@
 
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large" onclick="closeSidebar()">Close &times;</button>
-  <div class="container-flex profile-banner">
-    <div class="row">
-      <div class="col-sm-3">
-      </div>
-      <div class="col-sm-6">
-        <div class="profile-pic-box">
-          <% if current_user != nil %>
-            <img class="profile-pic-box" src="<%= current_user.profile_pic %>">
-          <!-- else have question mark -->
-          <% end %>
-        </div>
-      </div>
-      <div class="col-sm-3">
+    <div class="container-flex profile-banner">
+      <div class="profile-pic-box">
+        <% if current_user != nil %>
+          <img class="profile-pic" src="<%= current_user.profile_pic %>">
+        <!-- else have question mark -->
+        <% end %>
       </div>
     </div>
-  </div>
   <% if current_user != nil %>
   <%= current_user.username %>
   <div>
