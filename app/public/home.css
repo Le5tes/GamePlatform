@@ -11,13 +11,16 @@
   background-color: blue;
 }
 
-.profile-pic {
+.profile-pic-box {
   background-color: white;
   border-color: white;
   border-width: 4px;
   border-style: double;
-  max-width:100%;
-  max-height:100%;
+}
+
+.profile-pic {
+  width: auto;
+  height: auto;
 }
 
 .title {

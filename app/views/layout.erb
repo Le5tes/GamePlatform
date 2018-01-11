@@ -18,9 +18,10 @@
       <div class="col-sm-3">
       </div>
       <div class="col-sm-6">
-        <div class="profile-pic">
+        <div class="profile-pic-box">
           <% if current_user != nil %>
-            <img src="<%= current_user.profile_pic %>">
+            <img class="profile-pic-box" src="<%= current_user.profile_pic %>">
+          <!-- else have question mark -->
           <% end %>
         </div>
       </div>
@@ -30,6 +31,10 @@
   </div>
   <% if current_user != nil %>
   <%= current_user.username %>
+  <div>
+    <h4>Status:</h4>
+    <h4>Overall Rank:</h4>
+  </div>
     <form action="logout" method="post">
       <input type="submit" value="Log Out" name="Log Out">
     </form>
