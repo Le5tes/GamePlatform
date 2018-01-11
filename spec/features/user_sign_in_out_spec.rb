@@ -6,27 +6,31 @@ feature "Signing in/out" do
     end
   end
 
-  scenario "User can sign in", :skip_before do
-    visit '/spaces'
-    expect(page).to have_button("Log in")
-    expect(page).not_to have_button("Log out")
+  scenario "User can log in", :skip_before, js: true do
+    visit '/'
+    expect(page).to have_button("Log In")
+    click_button("opensidebar")
+    expect(page).not_to have_button("Log Out")
   end
 
-  scenario "User can sign out" do
-    expect(page).to have_button("Log out")
-    expect(page).not_to have_button("Log in")
+  scenario "User can sign out", js: true do
+    click_button("opensidebar")
+    expect(page).to have_button("Log Out")
   end
 
-  scenario "Revisiting signed in user can sign out" do
-    sign_out
+  scenario "Revisiting signed in user can sign out", js: true do
+    click_button("opensidebar")
+    click_button 'Log Out'
     sign_in
-    expect(page).to have_button("Log out")
-    expect(page).not_to have_button("Log in")
+    click_button("opensidebar")
+    expect(page).to have_button("Log Out")
   end
 
-  scenario "User receives welcome message when signed in" do
-    sign_out
+  scenario "User receives welcome message when signed in", js: true do
+    click_button("opensidebar")
+    click_button 'Log Out'
     sign_in
-    expect(page).to have_content("Welcome Tester")
+    click_button("opensidebar")
+    expect(page).to have_content("tester")
   end
 end

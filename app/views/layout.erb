@@ -13,9 +13,27 @@
 
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large" onclick="closeSidebar()">Close &times;</button>
-    <a href="#" class="w3-bar-item w3-button">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button">Link 3</a>
+  <div class="container-flex profile-banner">
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-6">
+        <div class="profile-pic">
+          <% if current_user != nil %>
+            <img src="<%= current_user.profile_pic %>">
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+  </div>
+  <% if current_user != nil %>
+  <%= current_user.username %>
+    <form action="logout" method="post">
+      <input type="submit" value="Log Out" name="Log Out">
+    </form>
+    <% end %>
   </div>
 
   <div id="main">

@@ -12,18 +12,18 @@ class GamePlatform < Sinatra::Base
 
   helpers do
     def current_user
-      @current_user ||= User.get(session[:user_id])
+      current_user ||= User.get(session[:user_id])
     end
 
     def save_image(image_file, filename)
-      File.open('./public/images/#{filename}', 'wb'){|file|
+      File.open("#{File.dirname(__FILE__)}/public/images/#{filename}", 'wb'){|file|
         file.write(image_file.read)
       }
     end
 
     def add_user_profile_pic(user, image_file, filename)
       save_image(image_file,filename)
-      user.profile_pic = '/images/#{filename}'
+      user.profile_pic = "/images/#{filename}"
       user.save
     end
   end
@@ -42,7 +42,8 @@ class GamePlatform < Sinatra::Base
             password_confirm: params[:password_confirm])
     if user.save
       session[:user_id] = user.id
-      add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) 
+      p params[:image].class
+      add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) if params[:image]
 
       redirect '/'
     else
@@ -60,7 +61,7 @@ class GamePlatform < Sinatra::Base
       redirect '/'
     else
       flash.next[:errors] = ['The email or password is incorrect']
-      redirect '/users/new'
+      redirect '/'
     end
   end
 
@@ -71,12 +72,14 @@ class GamePlatform < Sinatra::Base
   end
 
   get '/' do
+    p File.dirname(__FILE__)
     erb :homepage
   end
 
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
   end
-  
+
+  run if app_file == $0
 
 end

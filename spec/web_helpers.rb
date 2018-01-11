@@ -12,14 +12,9 @@ def sign_up(email: 'test@test.org.uk', password: 'passyword', password_confirm: 
 end
 
 def sign_in(username: 'tester', password: 'passyword')
-  visit '/spaces'
+  visit '/'
+  click_button 'Log In'
   fill_in 'username', with: username
   fill_in 'password', with: password
-  click_button 'Log in'
+  click_button 'Log In'
 end
-
-def sign_out
-  visit '/spaces'
-  click_button 'Log out'
-end
-

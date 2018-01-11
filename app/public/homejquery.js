@@ -29,3 +29,15 @@ returnButton = function(){
     <button class="home-buttons" name="signin" onclick="signUpForm()">Sign Up</button>
   </div>`)
 }
+
+logInForm = function(){
+  $("#home-box").empty()
+  $("#home-box").html(`
+    <form action="/login" method="post">
+      <div><input class="signupform" type = "text" name = "username" placeholder="username"></div>
+      <div><input class="signupform" type = "password" name = "password" placeholder="password"></div>
+      <div>
+        <input class="signupform" type = "submit" value = "Log In">
+        <button onclick="returnButton()">Back</button>
+      </div>
+`)}
