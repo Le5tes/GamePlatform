@@ -6,6 +6,7 @@
 	  postState = function(state){
 	  	$.post('/play/getstate', {id: <%= @play_id %>, gamestate: state})
 	  }
+	  GAMEPATH = <%= @game.rootpath %>
 
 	</script>
 </head>
