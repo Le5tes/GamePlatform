@@ -5,7 +5,7 @@ class Play
   property :id, Serial
   property :gamestate, Json
 
-  belongs_to :user 
+  has n, :users, through: Resource 
   belongs_to :game
 
 end
