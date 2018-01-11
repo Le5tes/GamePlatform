@@ -1,0 +1,15 @@
+<head>
+	<script>
+	  getState = function(){
+	  	return ($.get('/play/getstate/<%= @play_id %>'))
+	  }
+	  postState = function(state){
+	  	$.post('/play/getstate', {id: <%= @play_id %>, gamestate: state})
+	  }
+
+	</script>
+</head>
+<body>
+	<div id='game'></div>
+	<script> //$.("#game").html(<game.html in here>) </script>
+</body>
