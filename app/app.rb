@@ -1,9 +1,7 @@
 require 'sinatra/base'
 require 'json'
-require_relative './models/user'
-require_relative './models/play'
-
 require 'sinatra/flash'
+
 require_relative 'DataMapperSetup'
 
 class GamePlatform < Sinatra::Base
