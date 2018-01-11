@@ -17,7 +17,8 @@
       <div class="profile-pic-box">
         <% if current_user != nil %>
           <img class="profile-pic" src="<%= current_user.profile_pic %>">
-        <!-- else have question mark -->
+        <% else %>
+          <img class="default_profile_pic" src="/images/default_profile_pic.png">
         <% end %>
       </div>
     </div>

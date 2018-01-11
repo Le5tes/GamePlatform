@@ -16,7 +16,7 @@ feature "Signing in/out" do
   scenario "User can sign out", js: true do
     click_button("opensidebar")
     expect(page).to have_button("Log Out")
-    expect(page).to have_button("Play")
+    expect(page).not_to have_button("Log In")
   end
 
   scenario "Revisiting signed in user can sign out", js: true do

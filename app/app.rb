@@ -42,7 +42,6 @@ class GamePlatform < Sinatra::Base
             password_confirm: params[:password_confirm])
     if user.save
       session[:user_id] = user.id
-      p params[:image].class
       add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) if params[:image]
 
       redirect '/'
