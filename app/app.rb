@@ -72,7 +72,6 @@ class GamePlatform < Sinatra::Base
   end
 
   get '/' do
-    p session[:user_id]
     erb :homepage
   end
 

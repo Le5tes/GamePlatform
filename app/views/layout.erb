@@ -13,8 +13,11 @@
 
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large" onclick="closeSidebar()">Close &times;</button>
-    <% if current_user != nil %>
-    <%= current_user.username %>
+  <div class="container-flex profile-banner">
+    
+  </div>
+  <% if current_user != nil %>
+  <%= current_user.username %>
     <form action="logout" method="post">
       <input type="submit" value="Log Out" name="Log Out">
     </form>
