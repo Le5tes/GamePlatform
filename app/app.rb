@@ -74,6 +74,10 @@ class GamePlatform < Sinatra::Base
     erb :homepage
   end
 
+  get '/play/getstate/:id' do
+    Play.first(id: params[:id]).gamestate
+  end
+
   
 
 end
