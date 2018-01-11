@@ -9,6 +9,16 @@
   padding: 5%;
 }
 
+.sidebar-tag {
+  position: absolute;
+  top: 50vmin;
+}
+
+.signupform {
+  padding: 2%;
+  
+}
+
 .home-buttons {
   padding: 3%;
   width: 100%;
