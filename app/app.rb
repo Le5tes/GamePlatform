@@ -26,11 +26,7 @@ class GamePlatform < Sinatra::Base
       user.profile_pic = "/images/#{filename}"
       user.save
     end
-  end
 
-
-  get '/users/new' do
-    erb(:signup)
   end
 
   post '/users' do
@@ -43,7 +39,6 @@ class GamePlatform < Sinatra::Base
     if user.save
       session[:user_id] = user.id
       add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) if params[:image]
-
       redirect '/'
     else
       flash.next[:errors] = user.errors.full_messages
@@ -81,6 +76,12 @@ class GamePlatform < Sinatra::Base
     params[:status].to_json
   end
 
+  post '/tagline/new' do
+    user = current_user
+    user.tagline = params[:tagline]
+    user.save
+    params[:tagline].to_json
+  end
 
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
@@ -91,31 +92,67 @@ class GamePlatform < Sinatra::Base
     erb :game
   end
 
+  get '/test/play' do
+    game = Game.first()
+    play = Play.create(game: game, gamestate: [{}].to_json)
+    play.users << current_user
+    play.save
+    redirect "/play?id=#{play.id}"
+  end
+
+  get '/test/join' do
+    play = Play.last
+    play.users << current_user
+    play.save
+    redirect "/play?id=#{play.id}"
+  end
+
   post '/play/new' do
-    play = Play.create(game: params[:game])
-    params[:players].each{|player|
-      play.users << player
-    }
+    game = Game.first(id: params[:game_id])
+    play = Play.create(game: game, gamestate: [{}].to_json)
+    play.users << current_user
     play.save
     redirect "/play?id=#{play.id}"
   end
 
   get '/play' do
     @play_id = params[:id]
-    @game = Game.first(id: params[:game_id])
+    play =Play.first(id: params[:id])
+    @game =  play.game
+    @players = play.users.map{|usr| usr.username}
+    @currentplayer = play.users.index(current_user)
     erb :play
   end
 
   get '/play/getstate/:id' do
-    Play.first(id: params[:id]).gamestate
+    play =Play.first(id: params[:id])
+    play.gamestate.to_json
   end
 
   post '/play/gamestate' do
-    Play.first(id: params[:id]).gamestate = params[:gamestate]
+    play = Play.first(id: params[:id])
+    play.gamestate = params[:gamestate]
+    play.save
+    play.gamestate
   end
 
   get '/games' do
+    @games = Game.all
     erb(:games)
+  end
+
+  get '/games/new' do
+    erb(:new_game)
+  end
+
+  post '/games/new' do
+    Game.create(name: params[:game_name],
+                type: params[:game_type],
+                description: params[:game_description],
+                rootpath: "/games/#{params[:game_folder]}",
+                minplayercount: params[:game_min_player_count],
+                maxplayercount: params[:game_max_player_count])
+    redirect('/games')
   end
 
   get '/play' do

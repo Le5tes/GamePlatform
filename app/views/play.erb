@@ -8,13 +8,17 @@
   <script src="/jquery-3.2.1.min.js"></script>
   <script src="homejquery.js"></script>
   <script>
-	  getState = function(){
-	  	return ($.get('/play/getstate/<%= @play_id %>'))
-	  }
+	  getState = function(usage){
+	  	$.get('/play/getstate/<%= @play_id %>', function(data){
+	  		console.log("Data: "+ data);
+	  		usage(data)})
+	  	}
 	  postState = function(state){
-	  	$.post('/play/getstate', {id: <%= @play_id %>, gamestate: state})
+	  	$.post('/play/gamestate', {id: <%= @play_id %>, gamestate: state})
 	  }
-	  GAMEPATH = <%= @game.rootpath %>
+	  GAMEPATH = "<%= @game.rootpath %>"
+	  PLAYERS = <%= @players.to_s %>
+	  CURRENTPLAYER = <%= @currentplayer %>
 
 	</script>
 </head>
@@ -22,7 +26,8 @@
 
 <h2>RPS</h2>
 <div id='game'></div>
-	<script> $.("#game").load("${GAMEPATH}/play.html") </script>
+	<script> $("#game").load('<%= "#{@game.rootpath}/play.html" %>') </script>
+	<script src= '<%="#{@game.rootpath}/game.js"%>'> </script>
 
 </body>
 </html>

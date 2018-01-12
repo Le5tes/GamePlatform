@@ -6,19 +6,7 @@
     <link rel="stylesheet" href="home.css">
     <script src="/jquery-3.2.1.min.js"></script>
     <script src="/layoutjquery.js"></script>
-    <script>
-    postStatus = function(state){
-      $.ajax({
-        type: 'POST',
-        url: 'http://localhost:9292/status/new',
-        data: {status: state},
-        dataType: 'json',
-        success: function(data){
-          $('#status').text("Status: " + data)
-        }
-      })
-    }
-    </script>
+    <script src="/statusjquery.js"></script>
   </head>
   <body>
 
@@ -28,7 +16,7 @@
     <button class="w3-bar-item w3-button w3-large" onclick="closeSidebar()">Close &times;</button>
     <div class="container-flex profile-banner">
       <div class="profile-pic-box">
-        <% if current_user != nil %>
+        <% if current_user && current_user.profile_pic %>
           <img class="profile-pic" src="<%= current_user.profile_pic %>">
         <% else %>
           <img class="default_profile_pic" src="/images/default_profile_pic.png">
@@ -43,9 +31,19 @@
       <button onclick="postStatus('Away')">Away</button>
       <button onclick="postStatus('Being Cool')">Being Cool</button>
     </div>
-    <h4 id="status">Status:
-    <!-- <%= current_user.status if current_user.status != nil %></h4> -->
-    <h4>Overall Rank:</h4>
+    <div>
+      <h4 id="status">Status: <%= current_user.status %></h4>
+      <h4><%= current_user.status if current_user.status != nil %></h4>
+      <div id="taglinearea">
+        <div id="tagline">
+         <h5> <%= current_user.tagline if current_user.tagline != nil %></h5>
+       </div>
+      </div>
+       <h4>Overall Rank:</h4>
+    </div>
+    <div>
+      <button id="statusFormButton" onclick="updateStatusForm()">Update Tagline</button>
+    </div>
   </div>
     <form action="logout" method="post">
       <input type="submit" value="Log Out" name="Log Out">
