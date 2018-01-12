@@ -1,3 +1,5 @@
+require_relative 'ajaxhelper.rb'
+
 def sign_up(email: 'test@test.org.uk', password: 'passyword', password_confirm: 'passyword', username: 'tester', first_name: 'Tester', last_name: 'MacTesterford')
   visit '/users/new'
   within("#signupform") do

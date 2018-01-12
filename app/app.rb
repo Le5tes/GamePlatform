@@ -75,7 +75,10 @@ class GamePlatform < Sinatra::Base
   end
 
   post '/status/new' do
-    
+    user = current_user
+    user.status = params[:status]
+    user.save
+    params[:status].to_json
   end
 
 

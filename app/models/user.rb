@@ -13,6 +13,7 @@ class User
   property :last_name, String
   property :password_hash, Text, required: true
   property :profile_pic, URI
+  property :status, String
 
   attr_reader :password
   attr_accessor :password_confirm

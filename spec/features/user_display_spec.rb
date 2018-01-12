@@ -1,5 +1,7 @@
 feature "User display" do
 
+  include WaitForAjax
+  
   before do |example|
     unless example.metadata[:skip_before]
       sign_up
@@ -16,6 +18,7 @@ feature "User display" do
   scenario "a user can set their game status", js: true do
     click_button("opensidebar")
     click_button("Away")
+    WaitForAjax.wait_for_ajax
     expect(page).to have_content("Status: Away")
   end
 
