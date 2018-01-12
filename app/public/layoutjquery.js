@@ -9,3 +9,7 @@ function closeSidebar() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("openNav").style.display = "inline-block";
 }
+
+postState = function(state){
+  $.post('/status/new', state)
+}

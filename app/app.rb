@@ -74,6 +74,10 @@ class GamePlatform < Sinatra::Base
     erb :homepage
   end
 
+  post '/status/new' do
+    
+  end
+
 
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
@@ -82,7 +86,7 @@ class GamePlatform < Sinatra::Base
   get '/game/:name' do
     @game = Game.first(name: params[:name])
     erb :game
-  end 
+  end
 
   post '/play/new' do
     play = Play.create(game: params[:game])
@@ -96,7 +100,7 @@ class GamePlatform < Sinatra::Base
   get '/play' do
     @play_id = params[:id]
     @game = Game.first(id: params[:game_id])
-    erb :play 
+    erb :play
   end
 
   get '/play/getstate/:id' do
