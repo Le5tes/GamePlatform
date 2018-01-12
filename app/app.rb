@@ -71,7 +71,6 @@ class GamePlatform < Sinatra::Base
   end
 
   get '/' do
-    p File.dirname(__FILE__)
     erb :homepage
   end
 
@@ -88,6 +87,10 @@ class GamePlatform < Sinatra::Base
 
   post '/play/gamestate' do
     Play.first(id: params[:id]).gamestate = params[:gamestate]
+  end
+
+  get '/play' do
+    erb(:play)
   end
 
   run if app_file == $0
