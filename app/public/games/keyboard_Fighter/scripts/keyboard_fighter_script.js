@@ -32,10 +32,7 @@ $(document).ready(function () {
       getWinner()
       $(".progress").fadeOut('fast');
       $(".winner").fadeIn('slow');
-      // $('.winner').css('transform', "margin-top", "25%");
       $('.winner').animate({ marginTop: '22%', color: 'red' }, 1000);
-      // $(".winner").css("margin-top", "25%");
-      
     }
   });
 });
