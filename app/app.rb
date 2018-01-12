@@ -89,6 +89,10 @@ class GamePlatform < Sinatra::Base
     Play.first(id: params[:id]).gamestate = params[:gamestate]
   end
 
+  get '/games' do
+    erb(:games)
+  end
+
   get '/play' do
     erb(:play)
   end
