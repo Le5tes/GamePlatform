@@ -79,7 +79,25 @@ class GamePlatform < Sinatra::Base
     erb(:'/gamesView/keyboard_fighter')
   end
 
+  get '/game/:name' do
+    @game = Game.first(name: params[:name])
+    erb :game
+  end 
 
+  post '/play/new' do
+    play = Play.create(game: params[:game])
+    params[:players].each{|player|
+      play.users << player
+    }
+    play.save
+    redirect "/play?id=#{play.id}"
+  end
+
+  get '/play' do
+    @play_id = params[:id]
+    @game = Game.first(id: params[:game_id])
+    erb :play 
+  end
 
   get '/play/getstate/:id' do
     Play.first(id: params[:id]).gamestate
