@@ -82,29 +82,58 @@ class GamePlatform < Sinatra::Base
   get '/game/:name' do
     @game = Game.first(name: params[:name])
     erb :game
+  end
+
+  get '/test/addtestgame' do
+    Game.create(rootpath: "/games/testgame", minplayercount: 2, maxplayercount: 2)
   end 
 
+  get '/test/play' do
+    game = Game.first()
+    play = Play.create(game: game, gamestate: [{}].to_json) 
+    play.users << current_user
+    play.save
+    redirect "/play?id=#{play.id}"
+  end
+
+  get '/test/join' do
+    play = Play.last
+    play.users << current_user
+    play.save
+    redirect "/play?id=#{play.id}"
+  end
+
   post '/play/new' do
-    play = Play.create(game: params[:game])
-    params[:players].each{|player|
-      play.users << player
-    }
+    game = Game.first(id: params[:game_id])
+    play = Play.create(game: game, gamestate: [{}].to_json) 
+    play.users << current_user
     play.save
     redirect "/play?id=#{play.id}"
   end
 
   get '/play' do
     @play_id = params[:id]
-    @game = Game.first(id: params[:game_id])
+    p play =Play.first(id: params[:id])
+    @game =  play.game
+    @players = play.users.map{|usr| usr.username}
+    p play.users
+    p current_user
+    p @currentplayer = play.users.index(current_user)
     erb :play 
   end
 
   get '/play/getstate/:id' do
-    Play.first(id: params[:id]).gamestate
+    p play =Play.first(id: params[:id])
+    p play.gamestate
+    play.gamestate.to_json
   end
 
   post '/play/gamestate' do
-    Play.first(id: params[:id]).gamestate = params[:gamestate]
+    p params[:gamestate]
+    play = Play.first(id: params[:id])
+    play.gamestate = params[:gamestate]
+    play.save
+    p play.gamestate
   end
 
   get '/play' do
