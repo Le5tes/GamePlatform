@@ -29,11 +29,6 @@ class GamePlatform < Sinatra::Base
 
   end
 
-
-  get '/users/new' do
-    erb(:signup)
-  end
-
   post '/users' do
     user = User.create(email: params[:email],
             username: params[:username],
@@ -44,7 +39,6 @@ class GamePlatform < Sinatra::Base
     if user.save
       session[:user_id] = user.id
       add_user_profile_pic(user, params[:image][:tempfile], params[:image][:filename]) if params[:image]
-
       redirect '/'
     else
       flash.next[:errors] = user.errors.full_messages
@@ -76,11 +70,9 @@ class GamePlatform < Sinatra::Base
   end
 
   post '/status/new' do
-    puts 'here'
     user = current_user
     user.status = params[:status]
     user.save
-    p user
     params[:status].to_json
   end
 
@@ -102,7 +94,7 @@ class GamePlatform < Sinatra::Base
 
   get '/test/play' do
     game = Game.first()
-    play = Play.create(game: game, gamestate: [{}].to_json) 
+    play = Play.create(game: game, gamestate: [{}].to_json)
     play.users << current_user
     play.save
     redirect "/play?id=#{play.id}"
@@ -117,7 +109,7 @@ class GamePlatform < Sinatra::Base
 
   post '/play/new' do
     game = Game.first(id: params[:game_id])
-    play = Play.create(game: game, gamestate: [{}].to_json) 
+    play = Play.create(game: game, gamestate: [{}].to_json)
     play.users << current_user
     play.save
     redirect "/play?id=#{play.id}"
@@ -128,23 +120,20 @@ class GamePlatform < Sinatra::Base
     play =Play.first(id: params[:id])
     @game =  play.game
     @players = play.users.map{|usr| usr.username}
-
-    p @currentplayer = play.users.index(current_user)
-    erb :play 
+    @currentplayer = play.users.index(current_user)
+    erb :play
   end
 
   get '/play/getstate/:id' do
-    p play =Play.first(id: params[:id])
-    p play.gamestate
+    play =Play.first(id: params[:id])
     play.gamestate.to_json
   end
 
   post '/play/gamestate' do
-    p params[:gamestate]
     play = Play.first(id: params[:id])
     play.gamestate = params[:gamestate]
     play.save
-    p play.gamestate
+    play.gamestate
   end
 
   get '/games' do

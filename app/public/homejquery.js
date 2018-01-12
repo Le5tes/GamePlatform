@@ -1,7 +1,7 @@
 signUpForm = function(){
   $("#home-box").empty()
   $("#home-box").html(`<div id="signupform">
-    <form action= "/users" method = "post">
+    <form action= "/users" method = "post" enctype="multipart/form-data">
       <div><input class="signupform" type = "text" name = "username" placeholder="username"></div>
       <div><input class="signupform" type = "text" name = "first_name" placeholder="first name"></div>
       <div><input class="signupform" type = "text" name = "last_name" placeholder="last_name"></div>
