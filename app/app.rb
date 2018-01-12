@@ -26,6 +26,7 @@ class GamePlatform < Sinatra::Base
       user.profile_pic = "/images/#{filename}"
       user.save
     end
+
   end
 
 
@@ -74,6 +75,21 @@ class GamePlatform < Sinatra::Base
     erb :homepage
   end
 
+  post '/status/new' do
+    puts 'here'
+    user = current_user
+    user.status = params[:status]
+    user.save
+    p user
+    params[:status].to_json
+  end
+
+  post '/tagline/new' do
+    user = current_user
+    user.tagline = params[:tagline]
+    user.save
+    params[:tagline].to_json
+  end
 
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
@@ -83,10 +99,6 @@ class GamePlatform < Sinatra::Base
     @game = Game.first(name: params[:name])
     erb :game
   end
-
-  get '/test/addtestgame' do
-    Game.create(rootpath: "/games/testgame", minplayercount: 2, maxplayercount: 2)
-  end 
 
   get '/test/play' do
     game = Game.first()
@@ -113,11 +125,10 @@ class GamePlatform < Sinatra::Base
 
   get '/play' do
     @play_id = params[:id]
-    p play =Play.first(id: params[:id])
+    play =Play.first(id: params[:id])
     @game =  play.game
     @players = play.users.map{|usr| usr.username}
-    p play.users
-    p current_user
+
     p @currentplayer = play.users.index(current_user)
     erb :play 
   end
@@ -134,6 +145,25 @@ class GamePlatform < Sinatra::Base
     play.gamestate = params[:gamestate]
     play.save
     p play.gamestate
+  end
+
+  get '/games' do
+    @games = Game.all
+    erb(:games)
+  end
+
+  get '/games/new' do
+    erb(:new_game)
+  end
+
+  post '/games/new' do
+    Game.create(name: params[:game_name],
+                type: params[:game_type],
+                description: params[:game_description],
+                rootpath: "/games/#{params[:game_folder]}",
+                minplayercount: params[:game_min_player_count],
+                maxplayercount: params[:game_max_player_count])
+    redirect('/games')
   end
 
   get '/play' do

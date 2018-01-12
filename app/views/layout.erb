@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="home.css">
     <script src="/jquery-3.2.1.min.js"></script>
     <script src="/layoutjquery.js"></script>
+    <script src="/statusjquery.js"></script>
   </head>
   <body>
 
@@ -25,8 +26,24 @@
   <% if current_user != nil %>
   <%= current_user.username %>
   <div>
-    <h4>Status:</h4>
-    <h4>Overall Rank:</h4>
+    <div class="game-status">
+      <button onclick="postStatus('Here')">Here</button>
+      <button onclick="postStatus('Away')">Away</button>
+      <button onclick="postStatus('Being Cool')">Being Cool</button>
+    </div>
+    <div>
+      <h4 id="status">Status: <%= current_user.status %></h4>
+      <h4><%= current_user.status if current_user.status != nil %></h4>
+      <div id="taglinearea">
+        <div id="tagline">
+         <h5> <%= current_user.tagline if current_user.tagline != nil %></h5>
+       </div>
+      </div>
+       <h4>Overall Rank:</h4>
+    </div>
+    <div>
+      <button id="statusFormButton" onclick="updateStatusForm()">Update Tagline</button>
+    </div>
   </div>
     <form action="logout" method="post">
       <input type="submit" value="Log Out" name="Log Out">
