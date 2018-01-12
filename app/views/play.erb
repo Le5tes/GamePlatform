@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,22 @@
   <link rel="stylesheet" href="home.css">
   <script src="/jquery-3.2.1.min.js"></script>
   <script src="homejquery.js"></script>
+  <script>
+	  getState = function(){
+	  	return ($.get('/play/getstate/<%= @play_id %>'))
+	  }
+	  postState = function(state){
+	  	$.post('/play/getstate', {id: <%= @play_id %>, gamestate: state})
+	  }
+	  GAMEPATH = <%= @game.rootpath %>
+
+	</script>
 </head>
 <body>
 
 <h2>RPS</h2>
+<div id='game'></div>
+	<script> //$.("#game").html(<game.html in here>) </script>
 
 </body>
 </html>
