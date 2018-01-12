@@ -124,7 +124,22 @@ class GamePlatform < Sinatra::Base
   end
 
   get '/games' do
+    @games = Game.all
     erb(:games)
+  end
+
+  get '/games/new' do
+    erb(:new_game)
+  end
+
+  post '/games/new' do
+    Game.create(name: params[:game_name],
+                type: params[:game_type],
+                description: params[:game_description],
+                rootpath: "/games/#{params[:game_folder]}",
+                minplayercount: params[:game_min_player_count],
+                maxplayercount: params[:game_max_player_count])
+    redirect('/games')
   end
 
   get '/play' do
