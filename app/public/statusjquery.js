@@ -1,10 +1,12 @@
 postStatus = function(state){
+  console.log(state)
   $.ajax({
     type: 'POST',
     url: 'http://localhost:9292/status/new',
     data: {status: state},
     dataType: 'json',
     success: function(data){
+      console.log(data)
       $('#status').text("Status: " + data)
     }
   })

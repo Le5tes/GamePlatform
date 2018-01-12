@@ -9,6 +9,7 @@ require_relative 'web_helpers'
 require_relative 'ajaxhelper.rb'
 
 Capybara.app = GamePlatform
+Capybara.default_max_wait_time = 5
 
 include WaitForAjax
 

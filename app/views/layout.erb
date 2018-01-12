@@ -32,11 +32,11 @@
       <button onclick="postStatus('Being Cool')">Being Cool</button>
     </div>
     <div>
-      <h4 id="status">Status:
-    <!-- <%= current_user.status if current_user.status != nil %></h4> -->
+      <h4 id="status">Status: <%= current_user.status %></h4>
+      <h4><%= current_user.status if current_user.status != nil %></h4>
       <div id="taglinearea">
         <div id="tagline">
-         <h5> HELLO MATE </h5>
+         <h5> <%= current_user.tagline if current_user.tagline != nil %></h5>
        </div>
       </div>
        <h4>Overall Rank:</h4>
