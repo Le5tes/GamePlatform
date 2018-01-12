@@ -1,10 +1,42 @@
 $(document).ready(function () {
-  var count = 0;
-  $(document.body).keyup(function () {
+  var player_1_score = 0;
+  var player_2_score = 0;
+  var start_bar = 50;
 
-    var txtInput = $(this).val();
-    txtInput = txtInput.charAt(txtInput.length - 1);
-    count += 1;
-    $(".player").html(count);
+
+  function updateProgress(start_bar) {
+    $('.progress-bar').css("width", start_bar + '%')
+  }
+
+  function updateGame(event) {
+    if (event.which === 65) {
+      start_bar += 10;
+    } else if (event.which === 76) {
+      start_bar -= 10;
+    }
+    updateProgress(start_bar);
+    $(".score").html(`${start_bar}%`);
+  }
+
+  function getWinner() {
+    if (start_bar === 100) {
+      $(".winner").html("PLAYER 1 WINS")
+    } else if (start_bar === 0) {
+      $(".winner").html("PLAYER 2 WINS")
+    }
+  }
+
+  $(document.body).keyup(function (event) {
+    updateGame(event)
+    if (start_bar === 100 || start_bar === 0){
+      getWinner()
+      $(".progress").fadeOut('fast');
+      $(".winner").fadeIn('slow');
+      // $('.winner').css('transform', "margin-top", "25%");
+      $('.winner').animate({ marginTop: '22%', color: 'red' }, 1000);
+      // $(".winner").css("margin-top", "25%");
+      
+    }
   });
 });
+
