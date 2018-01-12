@@ -6,8 +6,11 @@ require 'selenium/webdriver'
 require 'database_cleaner'
 require 'pry'
 require_relative 'web_helpers'
+require_relative 'ajaxhelper.rb'
 
 Capybara.app = GamePlatform
+
+include WaitForAjax
 
 RSpec.configure do |config|
 

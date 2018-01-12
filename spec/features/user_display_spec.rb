@@ -1,6 +1,4 @@
 feature "User display" do
-
-  include WaitForAjax
   
   before do |example|
     unless example.metadata[:skip_before]

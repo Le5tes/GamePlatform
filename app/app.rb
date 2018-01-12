@@ -26,6 +26,7 @@ class GamePlatform < Sinatra::Base
       user.profile_pic = "/images/#{filename}"
       user.save
     end
+
   end
 
 
@@ -81,6 +82,12 @@ class GamePlatform < Sinatra::Base
     params[:status].to_json
   end
 
+  post '/tagline/new' do
+    user = current_user
+    user.tagline = params[:tagline]
+    user.save
+    params[:tagline].to_json
+  end
 
   get '/keyboard_fighter' do
     erb(:'/gamesView/keyboard_fighter')
